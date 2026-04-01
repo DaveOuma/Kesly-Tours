@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html>
 <head>
     <title>KESLY TOURS AND SAFARIS</title>
@@ -57,12 +57,6 @@
             margin-bottom: 8px;
         }
 
-        .image-caption {
-            font-size: 0.95rem;
-            color: #555;
-            margin-top: 6px;
-        }
-
         .whatsapp-btn {
             position: fixed;
             bottom: 20px;
@@ -75,6 +69,17 @@
             text-decoration: none;
         }
 
+        .book-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: #25D366;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
         footer {
             background: #0f4c5c;
             color: white;
@@ -82,16 +87,6 @@
             padding: 20px;
             margin-top: 40px;
         }
-        .book-btn {
-    display: inline-block;
-    margin-top: 10px;
-    background: #25D366;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-}
     </style>
 </head>
 <body>
@@ -108,31 +103,22 @@
                 <div class="tour-meta">
                     <h3>{{ tour.title }}</h3>
                     <p><strong>Location:</strong> {{ tour.location }}</p>
-                    <p><strong>Price:</strong>
-                        {% if tour.price %}
-                            KES {{ tour.price }}
-                        {% else %}
-                            Contact us
-                        {% endif %}
-                    </p>
+                    <p><strong>Price:</strong> KES {{ tour.price }}</p>
                     <p>{{ tour.description }}</p>
-                    <a href="https://wa.me/254704509111?text=Hello%20I%20would%20like%20to%20book%20{{ tour.title }}%20located%20in%20{{ tour.location }}.%20Please%20share%20details." 
-   class="book-btn">
-   Book This Tour
-</a>
+
+                    <a href="https://wa.me/254704509111?text=Hello%20I%20would%20like%20to%20book%20{{ tour.title }}%20located%20in%20{{ tour.location }}.%20Please%20share%20details."
+                       class="book-btn">
+                       Book This Tour
+                    </a>
                 </div>
 
                 <div class="tour-images">
                     {% for image in tour.images %}
-    <div>
-        <img src="{% static image %}" alt="{{ tour.title }}">
-    </div>
-{% empty %}
-    <p>No images available for this tour yet.</p>
-{% endfor %}
+                        <div>
+                            <img src="{% static image %}" alt="{{ tour.title }}">
                         </div>
                     {% empty %}
-                        <p>No images uploaded for this tour yet.</p>
+                        <p>No images available for this tour yet.</p>
                     {% endfor %}
                 </div>
             </div>
