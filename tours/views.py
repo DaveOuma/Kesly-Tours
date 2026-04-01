@@ -5,8 +5,10 @@ from .serializers import TourSerializer, TourImageSerializer, GalleryImageSerial
 
 
 def home(request):
-    tours = Tour.objects.prefetch_related('images').all().order_by('-created_at')
-    gallery = GalleryImage.objects.all().order_by('-uploaded_at')
+    # tours = Tour.objects.prefetch_related('images').all().order_by('-created_at')
+    # gallery = GalleryImage.objects.all().order_by('-uploaded_at')
+    tours = []
+    gallery = []
 
     return render(request, 'tours/home.html', {
         'business_name': 'KESLY TOURS AND SAFARIS',
