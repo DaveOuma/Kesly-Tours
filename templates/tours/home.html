@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KESLY TOURS AND SAFARIS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #0f4c5c;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        .section-title {
+            margin: 35px 0 20px;
+            font-size: 1.8rem;
+        }
+
+        .tour-card, .gallery-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .tour-images, .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .tour-images img, .gallery-grid img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .tour-meta {
+            margin-bottom: 12px;
+        }
+
+        .tour-meta h3 {
+            margin-bottom: 8px;
+        }
+
+        .image-caption {
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: 6px;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #0f4c5c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        .book-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #25D366;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ business_name }}</h1>
+        <p>Phone: {{ phone }} | Email: {{ email }}</p>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Tour Packages</h2>
+
+        {% for tour in tours %}
+            <div class="tour-card">
+                <div class="tour-meta">
+                    <h3>{{ tour.title }}</h3>
+                    <p><strong>Location:</strong> {{ tour.location }}</p>
+                    <p><strong>Price:</strong>
+                        {% if tour.price %}
+                            KES {{ tour.price }}
+                        {% else %}
+                            Contact us
+                        {% endif %}
+                    </p>
+                    <p>{{ tour.description }}</p>
+                    <a href="https://wa.me/254704509111?text=Hello%20I%20would%20like%20to%20book%20{{ tour.title }}%20located%20in%20{{ tour.location }}.%20Please%20share%20details." 
+   class="book-btn">
+   Book This Tour
+</a>
+                </div>
+
+                <div class="tour-images">
+                    {% for image in tour.images.all %}
+                        <div>
+                            <img src="{{ image.image.url }}" alt="{{ tour.title }}">
+                            {% if image.caption %}
+                                <p class="image-caption">{{ image.caption }}</p>
+                            {% endif %}
+                        </div>
+                    {% empty %}
+                        <p>No images uploaded for this tour yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% empty %}
+            <p>No tours added yet.</p>
+        {% endfor %}
+
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+            {% for photo in gallery %}
+                <div class="gallery-card">
+                    <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+                    <h3>{{ photo.title }}</h3>
+                    <p>{{ photo.caption }}</p>
+                </div>
+            {% empty %}
+                <p>No gallery images uploaded yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="https://wa.me/254704509111" class="whatsapp-btn">Chat on WhatsApp</a>
+
+    <footer>
+        <p>&copy; 2026 {{ business_name }}. All rights reserved.</p>
+    </footer>
+</body>
+</html>
