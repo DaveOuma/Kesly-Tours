@@ -5,10 +5,55 @@ from .serializers import TourSerializer, TourImageSerializer, GalleryImageSerial
 
 
 def home(request):
-    # tours = Tour.objects.prefetch_related('images').all().order_by('-created_at')
-    # gallery = GalleryImage.objects.all().order_by('-uploaded_at')
-    tours = []
-    gallery = []
+    tours = [
+        {
+            "title": "Maasai Mara Safari",
+            "location": "Maasai Mara",
+            "price": "15000",
+            "description": "Enjoy game drives, wildlife, and unforgettable safari experiences.",
+            "images": [
+                "images/mara1.jpg",
+                "images/mara2.jpg",
+            ],
+        },
+        {
+            "title": "Diani Beach Escape",
+            "location": "Diani",
+            "price": "12000",
+            "description": "Relax by the beach and enjoy the coastal beauty of Kenya.",
+            "images": [
+                "images/diani1.jpg",
+                "images/diani2.jpg",
+            ],
+        },
+        {
+            "title": "Amboseli Adventure",
+            "location": "Amboseli",
+            "price": "18000",
+            "description": "See elephants and amazing views of Mount Kilimanjaro.",
+            "images": [
+                "images/amboseli1.jpg",
+            ],
+        },
+    ]
+
+    gallery = [
+        {
+            "title": "Safari Moments",
+            "image": "images/mara1.jpg",
+            "caption": "Discover the wild",
+        },
+        {
+            "title": "Beach Experience",
+            "image": "images/diani1.jpg",
+            "caption": "Feel the ocean breeze",
+        },
+        {
+            "title": "Adventure Travel",
+            "image": "images/amboseli1.jpg",
+            "caption": "Travel with KESLY TOURS AND SAFARIS",
+        },
+    ]
 
     return render(request, 'tours/home.html', {
         'business_name': 'KESLY TOURS AND SAFARIS',
