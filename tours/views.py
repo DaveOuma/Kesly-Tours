@@ -9,7 +9,7 @@ def home(request):
         {
             "title": "Maasai Mara Safari",
             "location": "Maasai Mara",
-            "price": "35000",
+            "price": "37000",
             "description": "Enjoy game drives, wildlife, and unforgettable safari experiences.",
             "images": [
                 "images/images1.jpg",
@@ -19,7 +19,7 @@ def home(request):
         {
             "title": "Diani Beach Escape",
             "location": "Diani",
-            "price": "22000",
+            "price": "30000",
             "description": "Relax by the beach and enjoy the coastal beauty of Kenya.",
             "images": [
                 "images/download3.jpg",
@@ -29,7 +29,7 @@ def home(request):
         {
             "title": "Amboseli Adventure",
             "location": "Amboseli",
-            "price": "25000",
+            "price": "35000",
             "description": "See elephants and amazing views of Mount Kilimanjaro.",
             "images": [
                 "images/pexels-droneafrica-13234382.jpg",
