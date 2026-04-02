@@ -9,30 +9,30 @@ def home(request):
         {
             "title": "Maasai Mara Safari",
             "location": "Maasai Mara",
-            "price": "15000",
+            "price": "35000",
             "description": "Enjoy game drives, wildlife, and unforgettable safari experiences.",
             "images": [
-                "images/mara1.jpg",
-                "images/mara2.jpg",
+                "images/images1.jpg",
+                "images/images2.jpg",
             ],
         },
         {
             "title": "Diani Beach Escape",
             "location": "Diani",
-            "price": "12000",
+            "price": "22000",
             "description": "Relax by the beach and enjoy the coastal beauty of Kenya.",
             "images": [
-                "images/diani1.jpg",
-                "images/diani2.jpg",
+                "images/download3.jpg",
+                "images/view-horse-drinking-water-from-tree_118919-4884.jpg.jpg",
             ],
         },
         {
             "title": "Amboseli Adventure",
             "location": "Amboseli",
-            "price": "18000",
+            "price": "25000",
             "description": "See elephants and amazing views of Mount Kilimanjaro.",
             "images": [
-                "images/amboseli1.jpg",
+                "images/pexels-droneafrica-13234382.jpg",
             ],
         },
     ]
@@ -45,12 +45,12 @@ def home(request):
         },
         {
             "title": "Beach Experience",
-            "image": "images/diani1.jpg",
+            "image": "images/pexels-490714164-28157155.jpg",
             "caption": "Feel the ocean breeze",
         },
         {
             "title": "Adventure Travel",
-            "image": "images/amboseli1.jpg",
+            "image": "images/pexels-490714164-28157155.jpg",
             "caption": "Travel with KESLY TOURS AND SAFARIS",
         },
     ]
