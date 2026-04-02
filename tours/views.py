@@ -40,7 +40,7 @@ def home(request):
     gallery = [
         {
             "title": "Safari Moments",
-            "image": "images/mara1.jpg",
+            "image": "images/pexels-droneafrica-13234382.jpg",
             "caption": "Discover the wild",
         },
         {
