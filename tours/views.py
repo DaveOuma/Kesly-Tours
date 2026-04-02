@@ -62,3 +62,13 @@ def home(request):
         'tours': tours,
         'gallery': gallery,
     })
+
+
+class TourViewSet(viewsets.ModelViewSet):
+    queryset = Tour.objects.prefetch_related('images').all()
+    serializer_class = TourSerializer
+
+
+class GalleryImageViewSet(viewsets.ModelViewSet):
+    queryset = GalleryImage.objects.all()
+    serializer_class = GalleryImageSerializer

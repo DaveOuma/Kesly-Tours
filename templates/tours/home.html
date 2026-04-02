@@ -49,14 +49,6 @@
             border-radius: 10px;
         }
 
-        .tour-meta {
-            margin-bottom: 12px;
-        }
-
-        .tour-meta h3 {
-            margin-bottom: 8px;
-        }
-
         .whatsapp-btn {
             position: fixed;
             bottom: 20px;
@@ -100,17 +92,15 @@
 
         {% for tour in tours %}
             <div class="tour-card">
-                <div class="tour-meta">
-                    <h3>{{ tour.title }}</h3>
-                    <p><strong>Location:</strong> {{ tour.location }}</p>
-                    <p><strong>Price:</strong> KES {{ tour.price }}</p>
-                    <p>{{ tour.description }}</p>
+                <h3>{{ tour.title }}</h3>
+                <p><strong>Location:</strong> {{ tour.location }}</p>
+                <p><strong>Price:</strong> KES {{ tour.price }}</p>
+                <p>{{ tour.description }}</p>
 
-                    <a href="https://wa.me/254704509111?text=Hello%20I%20would%20like%20to%20book%20{{ tour.title }}%20located%20in%20{{ tour.location }}.%20Please%20share%20details."
-                       class="book-btn">
-                       Book This Tour
-                    </a>
-                </div>
+                <a href="https://wa.me/254704509111?text=Hello%20I%20would%20like%20to%20book%20{{ tour.title }}%20located%20in%20{{ tour.location }}.%20Please%20share%20details."
+                   class="book-btn">
+                   Book This Tour
+                </a>
 
                 <div class="tour-images">
                     {% for image in tour.images %}
