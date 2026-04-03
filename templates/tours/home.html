@@ -18,14 +18,14 @@
         }
 
         header {
-            background: #0f4c5c;
             color: white;
-            text-align: center;
             padding: 0;
         }
 
         .top-header {
-            padding: 30px 20px 20px;
+            background: #0f4c5c;
+            text-align: center;
+            padding: 20px;
         }
 
         .top-header h1 {
@@ -38,7 +38,6 @@
             font-size: 1rem;
         }
 
-        /* NAVBAR */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -94,7 +93,6 @@
             color: white !important;
         }
 
-        /* DROPDOWN */
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -142,6 +140,94 @@
             display: none;
             font-size: 26px;
             cursor: pointer;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slides {
+            display: flex;
+            height: 100%;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            flex-shrink: 0;
+            height: 80vh;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .slide-overlay h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .slide-overlay p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+
+        .hero-btn {
+            background: #25D366;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: #1faa52;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: #25D366;
         }
 
         .container {
@@ -290,6 +376,19 @@
             .top-header h1 {
                 font-size: 1.7rem;
             }
+
+            .hero-slider,
+            .slide {
+                height: 60vh;
+            }
+
+            .slide-overlay h2 {
+                font-size: 2rem;
+            }
+
+            .slide-overlay p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -333,6 +432,33 @@
 
             <div class="menu-toggle">☰</div>
         </nav>
+
+        <section class="hero-slider">
+            <div class="slides" id="slides">
+                {% for tour in tours|slice:":3" %}
+                    {% for image in tour.images|slice:":1" %}
+                        <div class="slide">
+                            <img src="{% static image %}" alt="{{ tour.title }}">
+                            <div class="slide-overlay">
+                                <h2>{{ tour.title }}</h2>
+                                <p>{{ tour.location }} • From KES {{ tour.price }}</p>
+                                <a href="#tours" class="hero-btn">View Package</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% empty %}
+                    <div class="slide">
+                        <div class="slide-overlay">
+                            <h2>Discover Kenya with KESLY Tours & Safaris</h2>
+                            <p>Explore amazing travel packages, wildlife safaris, beach holidays, and custom itineraries.</p>
+                            <a href="#tours" class="hero-btn">Explore Tours</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="slider-dots" id="sliderDots"></div>
+        </section>
     </header>
 
     <div class="container">
@@ -464,6 +590,43 @@
                 dropdownMenu.style.display = "none";
             }
         });
+
+        const slides = document.getElementById("slides");
+        const slideItems = document.querySelectorAll(".slide");
+        const dotsContainer = document.getElementById("sliderDots");
+        let currentIndex = 0;
+        const totalSlides = slideItems.length;
+
+        if (totalSlides > 0) {
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement("span");
+                dot.classList.add("dot");
+                if (i === 0) {
+                    dot.classList.add("active");
+                }
+                dot.addEventListener("click", () => {
+                    currentIndex = i;
+                    showSlide(currentIndex);
+                });
+                dotsContainer.appendChild(dot);
+            }
+
+            function showSlide(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`;
+                const dots = document.querySelectorAll(".dot");
+                dots.forEach(dot => dot.classList.remove("active"));
+                if (dots[index]) {
+                    dots[index].classList.add("active");
+                }
+            }
+
+            if (totalSlides > 1) {
+                setInterval(() => {
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                    showSlide(currentIndex);
+                }, 5000);
+            }
+        }
     </script>
 </body>
 </html>
