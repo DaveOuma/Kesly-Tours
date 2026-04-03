@@ -57,7 +57,7 @@ def home(request):
 
     return render(request, 'tours/home.html', {
         'business_name': 'KESLY TOURS AND SAFARIS',
-        'phone': '+254704509111',
+        'phone': ['+254704509111', '+254795123485'],
         'email': 'jerzenterprises@gmail.com',
         'tours': tours,
         'gallery': gallery,
