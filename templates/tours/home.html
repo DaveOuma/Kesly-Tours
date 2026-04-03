@@ -1,20 +1,147 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KESLY TOURS AND SAFARIS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             background: #f4f4f4;
+            color: #333;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         header {
             background: #0f4c5c;
             color: white;
-            padding: 40px 20px;
             text-align: center;
+            padding: 0;
+        }
+
+        .top-header {
+            padding: 30px 20px 20px;
+        }
+
+        .top-header h1 {
+            margin: 0 0 10px;
+            font-size: 2.2rem;
+        }
+
+        .top-header p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0a3d62;
+            padding: 15px 40px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            padding: 10px;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f6b93b;
+        }
+
+        .book-now-btn {
+            background: #25D366;
+            padding: 10px 16px !important;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .book-now-btn:hover {
+            background: #1faa52;
+            color: white !important;
+        }
+
+        /* DROPDOWN */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: white;
+            min-width: 270px;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            padding: 10px 0;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dropdown-menu li {
+            width: 100%;
+        }
+
+        .dropdown-menu a {
+            color: #333;
+            padding: 12px 18px;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f1f1f1;
+            color: #0a3d62;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 26px;
+            cursor: pointer;
         }
 
         .container {
@@ -25,9 +152,39 @@
         .section-title {
             margin: 35px 0 20px;
             font-size: 1.8rem;
+            color: #0a3d62;
         }
 
-        .tour-card, .gallery-card {
+        .services-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .service-box {
+            background: #f8f9fa;
+            border-left: 5px solid #0a3d62;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .service-box h3 {
+            margin-top: 0;
+            color: #0a3d62;
+            font-size: 1.05rem;
+        }
+
+        .tour-card,
+        .gallery-card {
             background: white;
             border-radius: 12px;
             padding: 20px;
@@ -35,14 +192,16 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
 
-        .tour-images, .gallery-grid {
+        .tour-images,
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
 
-        .tour-images img, .gallery-grid img {
+        .tour-images img,
+        .gallery-grid img {
             width: 100%;
             height: 220px;
             object-fit: cover;
@@ -59,6 +218,8 @@
             border-radius: 40px;
             font-weight: bold;
             text-decoration: none;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            z-index: 1000;
         }
 
         .book-btn {
@@ -72,6 +233,11 @@
             font-weight: bold;
         }
 
+        .book-btn:hover,
+        .whatsapp-btn:hover {
+            background: #1faa52;
+        }
+
         footer {
             background: #0f4c5c;
             color: white;
@@ -79,55 +245,194 @@
             padding: 20px;
             margin-top: 40px;
         }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: #0a3d62;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                width: 260px;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                min-width: 100%;
+                box-shadow: none;
+                margin-top: 8px;
+                border-radius: 8px;
+            }
+
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+
+            .top-header h1 {
+                font-size: 1.7rem;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>{{ business_name }}</h1>
-        <p>Phone: {{ phone }} | Email: {{ email }}</p>
+        <div class="top-header">
+            <h1>{{ business_name }}</h1>
+            <p>Phone: {{ phone }} | Email: {{ email }}</p>
+        </div>
+
+        <nav class="navbar">
+            <div class="logo">
+                <h2>KESLY Tours & Safaris</h2>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#services">Travel Services</a></li>
+                <li><a href="#tours">Tour Packages</a></li>
+
+                <li class="dropdown">
+                    <a href="#" id="servicesDropdown">Explore Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#services">🐘 Wildlife Safaris</a></li>
+                        <li><a href="#services">🏝️ Beach Holidays</a></li>
+                        <li><a href="#services">🏨 Hotel & Lodge Booking</a></li>
+                        <li><a href="#services">✈️ Airport Transfers</a></li>
+                        <li><a href="#services">🚗 Car Hire Services</a></li>
+                        <li><a href="#services">👨‍👩‍👧 Group Tours & Excursions</a></li>
+                        <li><a href="#services">💍 Honeymoon Packages</a></li>
+                        <li><a href="#services">🏢 Corporate Travel Solutions</a></li>
+                        <li><a href="#services">🧭 Travel Planning & Consultation</a></li>
+                        <li><a href="#services">✨ Custom Itinerary Design</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="https://wa.me/254704509111" class="book-now-btn">Book Now</a></li>
+            </ul>
+
+            <div class="menu-toggle">☰</div>
+        </nav>
     </header>
 
     <div class="container">
-        <h2 class="section-title">Tour Packages</h2>
-
-        {% for tour in tours %}
-            <div class="tour-card">
-                <h3>{{ tour.title }}</h3>
-                <p><strong>Location:</strong> {{ tour.location }}</p>
-                <p><strong>Price:</strong> KES {{ tour.price }}</p>
-                <p>{{ tour.description }}</p>
-
-                <a href="https://wa.me/254704509111?text=Hello%20I%20would%20like%20to%20book%20{{ tour.title }}%20located%20in%20{{ tour.location }}.%20Please%20share%20details."
-                   class="book-btn">
-                   Book This Tour
-                </a>
-
-                <div class="tour-images">
-                    {% for image in tour.images %}
-                        <div>
-                            <img src="{% static image %}" alt="{{ tour.title }}">
-                        </div>
-                    {% empty %}
-                        <p>No images available for this tour yet.</p>
-                    {% endfor %}
+        <section id="services" class="services-section">
+            <h2 class="section-title">Our Travel Services</h2>
+            <div class="services-grid">
+                <div class="service-box">
+                    <h3>🐘 Wildlife Safaris</h3>
+                    <p>Explore iconic national parks and game reserves with well-curated safari experiences.</p>
+                </div>
+                <div class="service-box">
+                    <h3>🏝️ Beach Holidays</h3>
+                    <p>Enjoy relaxing coastal getaways with curated stays and fun beach activities.</p>
+                </div>
+                <div class="service-box">
+                    <h3>🏨 Hotel & Lodge Booking</h3>
+                    <p>Comfortable and affordable accommodation options tailored to your destination and budget.</p>
+                </div>
+                <div class="service-box">
+                    <h3>✈️ Airport Transfers</h3>
+                    <p>Reliable pick-up and drop-off services for a smooth start and end to your journey.</p>
+                </div>
+                <div class="service-box">
+                    <h3>🚗 Car Hire Services</h3>
+                    <p>Flexible vehicle hire for solo travelers, families, and organized tour groups.</p>
+                </div>
+                <div class="service-box">
+                    <h3>👨‍👩‍👧 Group Tours & Excursions</h3>
+                    <p>Perfect packages for families, friends, schools, and organized travel groups.</p>
+                </div>
+                <div class="service-box">
+                    <h3>💍 Honeymoon Packages</h3>
+                    <p>Romantic escapes crafted for unforgettable memories and stress-free travel.</p>
+                </div>
+                <div class="service-box">
+                    <h3>🏢 Corporate Travel Solutions</h3>
+                    <p>Professional travel support for conferences, retreats, and staff movements.</p>
+                </div>
+                <div class="service-box">
+                    <h3>🧭 Travel Planning & Consultation</h3>
+                    <p>Expert guidance to help you choose the best destination, timing, and budget.</p>
+                </div>
+                <div class="service-box">
+                    <h3>✨ Custom Itinerary Design</h3>
+                    <p>Personalized trip planning based on your interests, schedule, and preferences.</p>
                 </div>
             </div>
-        {% empty %}
-            <p>No tours added yet.</p>
-        {% endfor %}
+        </section>
 
-        <h2 class="section-title">Gallery</h2>
-        <div class="gallery-grid">
-            {% for photo in gallery %}
-                <div class="gallery-card">
-                    <img src="{% static photo.image %}" alt="{{ photo.title }}">
-                    <h3>{{ photo.title }}</h3>
-                    <p>{{ photo.caption }}</p>
+        <section id="tours">
+            <h2 class="section-title">Tour Packages</h2>
+
+            {% for tour in tours %}
+                <div class="tour-card">
+                    <h3>{{ tour.title }}</h3>
+                    <p><strong>Location:</strong> {{ tour.location }}</p>
+                    <p><strong>Price:</strong> KES {{ tour.price }}</p>
+                    <p>{{ tour.description }}</p>
+
+                    <a href="https://wa.me/254704509111?text=Hello%20I%20would%20like%20to%20book%20{{ tour.title }}%20located%20in%20{{ tour.location }}.%20Please%20share%20details."
+                       class="book-btn">
+                       Book This Tour
+                    </a>
+
+                    <div class="tour-images">
+                        {% for image in tour.images %}
+                            <div>
+                                <img src="{% static image %}" alt="{{ tour.title }}">
+                            </div>
+                        {% empty %}
+                            <p>No images available for this tour yet.</p>
+                        {% endfor %}
+                    </div>
                 </div>
             {% empty %}
-                <p>No gallery images uploaded yet.</p>
+                <p>No tours added yet.</p>
             {% endfor %}
-        </div>
+        </section>
+
+        <section id="gallery">
+            <h2 class="section-title">Gallery</h2>
+            <div class="gallery-grid">
+                {% for photo in gallery %}
+                    <div class="gallery-card">
+                        <img src="{% static photo.image %}" alt="{{ photo.title }}">
+                        <h3>{{ photo.title }}</h3>
+                        <p>{{ photo.caption }}</p>
+                    </div>
+                {% empty %}
+                    <p>No gallery images uploaded yet.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="contact" class="services-section">
+            <h2 class="section-title">Contact Us</h2>
+            <p><strong>Phone:</strong> {{ phone }}</p>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <p>Reach out to us for bookings, inquiries, custom itineraries, and travel consultations.</p>
+        </section>
     </div>
 
     <a href="https://wa.me/254704509111" class="whatsapp-btn">Chat on WhatsApp</a>
@@ -135,5 +440,30 @@
     <footer>
         <p>&copy; 2026 {{ business_name }}. All rights reserved.</p>
     </footer>
+
+    <script>
+        const toggle = document.querySelector(".menu-toggle");
+        const nav = document.querySelector(".nav-links");
+        const dropdownToggle = document.querySelector(".dropdown > a");
+        const dropdownMenu = document.querySelector(".dropdown-menu");
+
+        toggle.addEventListener("click", () => {
+            nav.classList.toggle("active");
+        });
+
+        dropdownToggle.addEventListener("click", (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdownMenu.style.display =
+                    dropdownMenu.style.display === "block" ? "none" : "block";
+            }
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!e.target.closest(".dropdown") && window.innerWidth <= 768) {
+                dropdownMenu.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
